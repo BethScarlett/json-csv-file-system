@@ -1,0 +1,8 @@
+{
+  "name": "Adam",
+  "highscore": "£10,000",
+  "topscores": ["£10,000", "£5,000", "£5,000"],
+  "gamesplayed": 5,
+  "favouritebox": 9,
+  "active": true
+}
