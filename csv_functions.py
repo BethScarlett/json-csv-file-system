@@ -13,9 +13,7 @@ with open(res, "r", encoding="utf-8") as file:
             line_num += 1
             category_names = row
         else:
-            print(f"{category_names[0].title()}: {row[0]}, "
-                  f"{category_names[1].title()}: {row[1]}, "
-                  f"{category_names[2].title()}: {row[2]}, "
-                  f"{category_names[3].title()}: {row[3]}, "
-                  f"{category_names[4].title()}: {row[4]}, "
-                  f"{category_names[5].title()}: {row[5]} ")
+            zpd = zip(category_names, row)
+            for r in zpd:
+                print(f"{r[0]}: {r[1]}")
+
