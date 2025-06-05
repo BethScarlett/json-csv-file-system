@@ -7,7 +7,7 @@ BASE_DIR = Path("CSV_Files")
 res = BASE_DIR / "test_csv.csv"
 
 def read_csv(f:Path):
-    with open(res, "r", encoding="utf-8") as file:
+    with open(f, "r", encoding="utf-8") as file:
         csv_reader = csv.reader(file, delimiter=",")
         line_num = 0
         for row in csv_reader:
@@ -50,6 +50,3 @@ def validate_json_conversion(p1: Path, p2: Path):
                 if cleanrow != jrow:
                     return False
         return True
-
-p = res.parent.parent / 'JSON_Files' / f'{res.stem}.json'
-print(f'JSON matches CSV? {convert_to_json(res)}')

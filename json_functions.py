@@ -12,6 +12,3 @@ def read_json(p:Path):
     """
     with open(p, "r", encoding="utf-8") as jsf:
         return json.load(jsf)
-
-
-print(read_json(res))
