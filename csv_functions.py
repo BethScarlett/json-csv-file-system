@@ -20,13 +20,15 @@ def read_csv(f:Path):
                 for r in zpd:
                     print(f"{r[0]}: {r[1]}")
 
-def convert_to_json(f:Path) -> None:
+def convert_to_json(f:Path) -> bool:
     #Generate new path
     new_path = f.parent.parent / 'JSON_Files' / f'{f.stem}.json'
 
     #Read file and convert to JSON using new path
     temp = pd.read_csv(f)
     temp.to_json(new_path, orient='records', force_ascii=False, indent=1)
+
+    return validate_json_conversion(new_path, f)
 
 def validate_json_conversion(p1: Path, p2: Path):
     js = read_json(p1)
@@ -35,21 +37,19 @@ def validate_json_conversion(p1: Path, p2: Path):
         jcats = [k for k in js[0].keys()]
         for i, row in enumerate(csv_reader):
             if i == 0:
-                if row == jcats:
-                    print("Categories ok")
-                else:
-                    print("No match")
+                if row != jcats:
                     return False
             else:
                 jrow = [str(v) for v in js[i-1].values()]
-                print(row)
-                print(jrow)
-                if row == jrow:
-                    print("Categories ok")
-                else:
-                    print("No match")
+                cleanrow = []
+                for v in row:
+                    if v == 'false' or 'true':
+                        v = v.title()
+                    cleanrow.append(v)
+
+                if cleanrow != jrow:
                     return False
         return True
 
 p = res.parent.parent / 'JSON_Files' / f'{res.stem}.json'
-print(f'JSON matches CSV? {validate_json_conversion(p,res)}')
+print(f'JSON matches CSV? {convert_to_json(res)}')
