@@ -1,9 +1,6 @@
 import json
 from pathlib import Path
 
-BASE_DIR = Path("JSON_Files")
-res = BASE_DIR / "test_json.json"
-
 def read_json(p:Path):
     """
     Take in File object (p) and print contents
